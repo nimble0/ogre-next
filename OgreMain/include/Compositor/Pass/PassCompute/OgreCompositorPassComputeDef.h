@@ -119,6 +119,14 @@ namespace Ogre
         {
         }
 
+        CompositorPassComputeDef *clone( CompositorTargetDef *parentTargetDef ) const
+        {
+            CompositorPassComputeDef* cloned = OGRE_NEW CompositorPassComputeDef( *this );
+            cloned->mParentTargetDef = parentTargetDef;
+            cloned->mParentNodeDef = parentTargetDef->getParentNodeDef();
+            return cloned;
+        }
+
         /** Indicates the pass to change the texture units to use the specified texture sources.
             @See ComputeTextureSource for params
         */

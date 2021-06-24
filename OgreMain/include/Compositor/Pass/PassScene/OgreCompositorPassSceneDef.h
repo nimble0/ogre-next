@@ -216,6 +216,13 @@ namespace Ogre
             mMaterialScheme = rs->_getDefaultViewportMaterialScheme();
         }
 
+        CompositorPassSceneDef *clone( CompositorTargetDef *parentTargetDef ) const
+        {
+            CompositorPassSceneDef* cloned = OGRE_NEW CompositorPassSceneDef( *this );
+            cloned->mParentTargetDef = parentTargetDef;
+            return cloned;
+        }
+
         void setVisibilityMask( uint32 visibilityMask )
         {
             mVisibilityMask = visibilityMask & VisibilityFlags::RESERVED_VISIBILITY_FLAGS;

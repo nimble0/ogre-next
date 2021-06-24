@@ -72,6 +72,13 @@ namespace Ogre
             setAllStoreActions( StoreAction::StoreAndMultisampleResolve );
         }
 
+        CompositorPassClearDef *clone( CompositorTargetDef *parentTargetDef ) const
+        {
+            CompositorPassClearDef* cloned = OGRE_NEW CompositorPassClearDef( *this );
+            cloned->mParentTargetDef = parentTargetDef;
+            return cloned;
+        }
+
         /** Sets which buffers you want to clear for each attachment. Replaces
             'mClearBufferFlags' from previous versions of Ogre.
         @remarks

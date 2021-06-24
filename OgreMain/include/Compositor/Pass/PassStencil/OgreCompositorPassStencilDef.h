@@ -50,6 +50,13 @@ namespace Ogre
         uint32                  mStencilRef;
 
         CompositorPassStencilDef( CompositorTargetDef *parentTargetDef );
+
+        CompositorPassStencilDef *clone( CompositorTargetDef *parentTargetDef ) const
+        {
+            CompositorPassStencilDef* cloned = OGRE_NEW CompositorPassStencilDef( *this );
+            cloned->mParentTargetDef = parentTargetDef;
+            return cloned;
+        }
     };
 
     /** @} */

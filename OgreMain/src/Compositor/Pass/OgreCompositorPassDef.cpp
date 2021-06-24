@@ -63,10 +63,15 @@ namespace Ogre
         "CUSTOM"
     };
 
-    CompositorTargetDef::CompositorTargetDef( const String &renderTargetName, uint32 rtIndex,
-                                              CompositorNodeDef *parentNodeDef ) :
+    CompositorTargetDef::CompositorTargetDef(
+        const String &renderTargetName,
+        TextureDefinitionBase::TextureSource renderTargetTextureSource,
+        uint32 rtIndex,
+        CompositorNodeDef *parentNodeDef
+    ) :
         mRenderTargetName( renderTargetName.empty() ? IdString() : renderTargetName ),
         mRenderTargetNameStr( renderTargetName ),
+        mRenderTargetTextureSource( renderTargetTextureSource ),
         mRtIndex( rtIndex ),
         mShadowMapSupportedLightTypes( 0 ),
         mParentNodeDef( parentNodeDef )
@@ -85,6 +90,43 @@ namespace Ogre
         }
 
         mCompositorPasses.clear();
+    }
+    //-----------------------------------------------------------------------------------
+    void CompositorTargetDef::copy( const CompositorTargetDef& b )
+    {
+        mRenderTargetName = b.mRenderTargetName;
+        mRenderTargetTextureSource = b.mRenderTargetTextureSource;
+        mRtIndex = b.mRtIndex;
+        mShadowMapSupportedLightTypes = b.mShadowMapSupportedLightTypes;
+
+        CompositorPassDefVec::const_iterator itor = mCompositorPasses.begin();
+        CompositorPassDefVec::const_iterator end  = mCompositorPasses.end();
+        while( itor != end )
+        {
+            OGRE_DELETE *itor;
+            ++itor;
+        }
+        mCompositorPasses.clear();
+
+        mCompositorPasses.reserve( b.mCompositorPasses.size() );
+
+        itor = b.mCompositorPasses.begin();
+        end  = b.mCompositorPasses.end();
+        while( itor != end )
+        {
+            CompositorPassDef* cloned = (*itor)->clone(this);
+
+            char tmpBuffer[128];
+            LwString profilingId( LwString::FromEmptyPointer( tmpBuffer, sizeof(tmpBuffer) ) );
+            profilingId.a( CompositorPassTypeEnumNames[cloned->getType()], " ",
+                        Id::generateNewId<CompositorPassDef>() );
+            cloned->mProfilingId = profilingId.c_str();
+
+            mParentNodeDef->postInitializePassDef( cloned );
+
+            mCompositorPasses.push_back(cloned);
+            ++itor;
+        }
     }
     //-----------------------------------------------------------------------------------
     CompositorPassDef* CompositorTargetDef::addPass( CompositorPassType passType, IdString customId )
