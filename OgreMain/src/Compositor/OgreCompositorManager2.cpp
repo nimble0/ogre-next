@@ -267,6 +267,26 @@ namespace Ogre
         return retVal;
     }
     //-----------------------------------------------------------------------------------
+    CompositorNodeDef* CompositorManager2::addNodeDefinition( const String &name, const CompositorNodeDef& copyNode )
+    {
+        CompositorNodeDef *retVal = 0;
+
+        assert( copyNode.getCompositorManager() == this);
+
+        if( mNodeDefinitions.find( name ) == mNodeDefinitions.end() )
+        {
+            retVal = OGRE_NEW CompositorNodeDef( name, copyNode );
+            mNodeDefinitions[name] = retVal;
+        }
+        else
+        {
+            OGRE_EXCEPT( Exception::ERR_DUPLICATE_ITEM, "A node definition with name '" +
+                         name + "' already exists", "CompositorManager2::addNodeDefinition" );
+        }
+
+        return retVal;
+    }
+    //-----------------------------------------------------------------------------------
     void CompositorManager2::removeNodeDefinition( IdString nodeDefName )
     {
         CompositorNodeDefMap::iterator itor = mNodeDefinitions.find( nodeDefName );

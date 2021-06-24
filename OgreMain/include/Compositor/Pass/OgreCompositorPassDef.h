@@ -36,6 +36,8 @@ THE SOFTWARE.
 #include "OgreResourceTransition.h"
 #include "OgreRenderPassDescriptor.h"
 
+#include "Compositor/OgreTextureDefinition.h"
+
 #include "ogrestd/vector.h"
 
 namespace Ogre
@@ -91,6 +93,7 @@ namespace Ogre
     {
         CompositorPassType  mPassType;
 
+    protected:
         CompositorTargetDef *mParentTargetDef;
 
     public:
@@ -236,6 +239,8 @@ namespace Ogre
             }
         }
         virtual ~CompositorPassDef();
+ 
+        virtual CompositorPassDef *clone(CompositorTargetDef *parentTargetDef) const=0;
 
         void setAllClearColours( const ColourValue &clearValue );
         void setAllLoadActions( LoadAction::LoadAction loadAction );
@@ -252,6 +257,8 @@ namespace Ogre
     {
         /// Name is local to Node! (unless using 'global_' prefix)
         IdString                mRenderTargetName;
+        TextureDefinitionBase::TextureSource
+                                mRenderTargetTextureSource;
         String                  mRenderTargetNameStr;
 
         CompositorPassDefVec    mCompositorPasses;
@@ -271,13 +278,22 @@ namespace Ogre
         CompositorNodeDef       *mParentNodeDef;
 
     public:
-		CompositorTargetDef( const String &renderTargetName, uint32 rtIndex,
-							 CompositorNodeDef *parentNodeDef );
+        CompositorTargetDef(
+            const String &renderTargetName,
+            TextureDefinitionBase::TextureSource renderTargetTextureSource,
+            uint32 rtIndex,
+            CompositorNodeDef *parentNodeDef );
         ~CompositorTargetDef();
+
+        void copy( const CompositorTargetDef &b );
 
         IdString getRenderTargetName() const            { return mRenderTargetName; }
         String getRenderTargetNameStr() const           { return mRenderTargetNameStr; }
 
+        TextureDefinitionBase::TextureSource getRenderTargetTextureSource() const
+        {
+            return mRenderTargetTextureSource;
+        }
         uint32 getRtIndex(void) const                   { return mRtIndex; }
 
         void setShadowMapSupportedLightTypes( uint8 types ) { mShadowMapSupportedLightTypes = types; }
@@ -298,7 +314,7 @@ namespace Ogre
         /// @copydoc CompositorManager2::getNodeDefinitionNonConst
         CompositorPassDefVec& getCompositorPassesNonConst()     { return mCompositorPasses; }
 
-        const CompositorNodeDef* getParentNodeDef(void) const   { return mParentNodeDef; }
+        CompositorNodeDef *getParentNodeDef() const             { return mParentNodeDef; }
     };
 
     /** @} */

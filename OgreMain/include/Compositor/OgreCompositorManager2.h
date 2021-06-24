@@ -175,6 +175,7 @@ namespace Ogre
 
         /// Returns a new node definition. The name must be unique, throws otherwise.
         CompositorNodeDef* addNodeDefinition( const String &name );
+        CompositorNodeDef* addNodeDefinition( const String &name, const CompositorNodeDef &baseNode );
 
         /// Removes the node definition with the given name. Throws if not found
         void removeNodeDefinition( IdString nodeDefName );

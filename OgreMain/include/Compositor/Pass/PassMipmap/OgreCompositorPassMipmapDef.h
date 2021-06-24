@@ -81,6 +81,13 @@ namespace Ogre
             mKernelRadius( 8 )
         {
         }
+
+        CompositorPassMipmapDef *clone(CompositorTargetDef *parentTargetDef) const
+        {
+            CompositorPassMipmapDef* cloned = OGRE_NEW CompositorPassMipmapDef( *this );
+            cloned->mParentTargetDef = parentTargetDef;
+            return cloned;
+        }
     };
 
     /** @} */

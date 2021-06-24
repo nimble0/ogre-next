@@ -117,6 +117,14 @@ namespace Ogre
         {
         }
 
+        CompositorPassQuadDef *clone(CompositorTargetDef *parentTargetDef) const
+        {
+            CompositorPassQuadDef* cloned = OGRE_NEW CompositorPassQuadDef( *this );
+            cloned->mParentTargetDef = parentTargetDef;
+            cloned->mParentNodeDef = parentTargetDef->getParentNodeDef();
+            return cloned;
+        }
+
         /** Indicates the pass to change the texture units to use the specified texture sources.
             @See QuadTextureSource for params
         */

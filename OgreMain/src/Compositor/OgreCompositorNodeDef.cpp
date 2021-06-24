@@ -33,6 +33,30 @@ THE SOFTWARE.
 
 namespace Ogre
 {
+    CompositorNodeDef::CompositorNodeDef( const String &name, const CompositorNodeDef& b ) :
+        TextureDefinitionBase( b ),
+
+        mName( name ),
+        mOutChannelMapping( b.mOutChannelMapping ),
+        mOutBufferChannelMapping( b.mOutBufferChannelMapping ),
+        mStartEnabled( b.mStartEnabled ),
+        mNameStr( b.mNameStr ),
+        mCompositorManager( b.mCompositorManager )
+    {
+        setNumTargetPass( b.getNumTargetPasses() );
+
+        CompositorTargetDefVec::const_iterator itor = b.mTargetPasses.begin();
+        CompositorTargetDefVec::const_iterator end  = b.mTargetPasses.end();
+
+        while( itor != end )
+        {
+            mTargetPasses.push_back( CompositorTargetDef(
+                "", static_cast<TextureDefinitionBase::TextureSource>(-1), -1, this ) );
+            mTargetPasses.back().copy( *itor );
+            ++itor;
+        }
+    }
+
     void CompositorNodeDef::getTextureSource( size_t outputChannel, size_t &index,
                                                 TextureSource &textureSource ) const
     {
@@ -46,10 +70,15 @@ namespace Ogre
         assert( mTargetPasses.size() < mTargetPasses.capacity() &&
                 "setNumTargetPass called improperly!" );
 
-        if( renderTargetName.find( "global_" ) == 0 )
-            addTextureSourceName( renderTargetName, 0, TEXTURE_GLOBAL );
+        TextureSource textureSource = TEXTURE_LOCAL;
 
-        mTargetPasses.push_back( CompositorTargetDef( renderTargetName, rtIndex, this ) );
+        if( renderTargetName.find( "global_" ) == 0 )
+        {
+            addTextureSourceName( renderTargetName, 0, TEXTURE_GLOBAL );
+            textureSource = TEXTURE_GLOBAL;
+        }
+
+        mTargetPasses.push_back( CompositorTargetDef( renderTargetName, textureSource, rtIndex, this ) );
         return &mTargetPasses.back();
     }
     //-----------------------------------------------------------------------------------

@@ -75,6 +75,14 @@ namespace Ogre
         {
         }
 
+        CompositorPassIblSpecularDef *clone( CompositorTargetDef *parentTargetDef ) const
+        {
+            CompositorPassIblSpecularDef *cloned = OGRE_NEW CompositorPassIblSpecularDef( *this );
+            cloned->mParentTargetDef = parentTargetDef;
+            cloned->mParentNodeDef = parentTargetDef->getParentNodeDef();
+            return cloned;
+        }
+
         ~CompositorPassIblSpecularDef();
 
         /**

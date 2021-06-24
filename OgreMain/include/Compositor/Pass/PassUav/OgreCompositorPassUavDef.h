@@ -106,6 +106,14 @@ namespace Ogre
         {
         }
 
+        CompositorPassUavDef *clone( CompositorTargetDef *parentTargetDef ) const
+        {
+            CompositorPassUavDef* cloned = OGRE_NEW CompositorPassUavDef( *this );
+            cloned->mParentTargetDef = parentTargetDef;
+            cloned->mParentNodeDef = parentTargetDef->getParentNodeDef();
+            return cloned;
+        }
+
         /** Indicates the pass to change the UAV slots to use the specified texture sources.
         @param slot
             The buffer binding location for shader access. For OpenGL this must be unique and
