@@ -7,6 +7,11 @@
 
 #include "OgreTextAreaOverlayElement.h"
 
+#include "OgreRoot.h"
+#include "OgreHlmsUnlit.h"
+#include "OgreHlmsUnlitDatablock.h"
+#include "OgreTextureGpuManager.h"
+
 using namespace Demo;
 
 namespace Demo
@@ -26,6 +31,31 @@ namespace Demo
                                                      Ogre::ResourceGroupManager::
                                                      AUTODETECT_RESOURCE_GROUP_NAME,
                                                      Ogre::SCENE_DYNAMIC );
+
+        Ogre::TextureGpuManager* textureManager = Ogre::Root::getSingleton()
+            .getRenderSystem()
+            ->getTextureGpuManager();
+        Ogre::TextureGpu* texture = textureManager->createOrRetrieveTexture(
+            "doesnt-exist.png",
+            Ogre::GpuPageOutStrategy::Discard,
+            Ogre::TextureFlags::AutomaticBatching | Ogre::TextureFlags::PrefersLoadingFromFileAsSRGB,
+            Ogre::TextureTypes::Type2D,
+            Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME);
+
+        Ogre::HlmsUnlit* hlms = static_cast<Ogre::HlmsUnlit*>(Ogre::Root::getSingleton().getHlmsManager()->getHlms(Ogre::HLMS_UNLIT));
+        auto* datablock = static_cast<Ogre::HlmsUnlitDatablock*>(
+            hlms->createDatablock("blah", "blah", Ogre::HlmsMacroblock(), Ogre::HlmsBlendblock(), Ogre::HlmsParamVec()));
+        datablock->setTexture(0, texture);
+
+        item->setDatablock(datablock);
+        item->setDatablock(Ogre::IdString{});
+        hlms->destroyDatablock(datablock->getName());
+
+        // Fixes bug
+        // if(texture->isDataReady())
+            textureManager->destroyTexture(texture);
+        // Hangs here
+        textureManager->waitForStreamingCompletion();
 
         mSceneNode = sceneManager->getRootSceneNode( Ogre::SCENE_DYNAMIC )->
                 createChildSceneNode( Ogre::SCENE_DYNAMIC );
