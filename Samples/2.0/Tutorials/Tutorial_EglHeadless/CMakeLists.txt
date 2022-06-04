@@ -13,7 +13,7 @@ endmacro()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-include_directories(${CMAKE_SOURCE_DIR}/Components/Hlms/Common/include)
+include_directories(${OGRE_SOURCE_DIR}/Components/Hlms/Common/include)
 ogre_add_component_include_dir(Hlms/Pbs)
 ogre_add_component_include_dir(Hlms/Unlit)
 

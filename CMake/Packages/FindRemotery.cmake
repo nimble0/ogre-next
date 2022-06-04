@@ -59,7 +59,7 @@ if( Remotery_INCLUDE_DIR AND Remotery_LIBRARIES )
 endif()
 
 if (WIN32)
-	set(Remotery_BIN_SEARCH_PATH ${OGRE_DEPENDENCIES_DIR}/bin ${CMAKE_SOURCE_DIR}/Dependencies/bin ${Remotery_HOME}/dll
+	set(Remotery_BIN_SEARCH_PATH ${OGRE_DEPENDENCIES_DIR}/bin ${OGRE_SOURCE_DIR}/Dependencies/bin ${Remotery_HOME}/dll
 		${ENV_Remotery_HOME}/dll ${ENV_OGRE_DEPENDENCIES_DIR}/bin
 		${OGRE_SOURCE}/Dependencies/bin ${ENV_OGRE_SOURCE}/Dependencies/bin
 		${OGRE_SDK}/bin ${ENV_OGRE_SDK}/bin

@@ -13,7 +13,7 @@ endmacro()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-include_directories(${CMAKE_SOURCE_DIR}/Components/Hlms/Common/include)
+include_directories(${OGRE_SOURCE_DIR}/Components/Hlms/Common/include)
 ogre_add_component_include_dir(Hlms/Pbs)
 
 add_recursive( ./ SOURCE_FILES )
@@ -21,7 +21,7 @@ add_recursive( ./ SOURCE_FILES )
 set( POSTPROCESSING_RESOURCES ${SAMPLE_COMMON_RESOURCES} )
 if( APPLE )
 	set( POSTPROCESSING_RESOURCES ${POSTPROCESSING_RESOURCES}
-		 ${CMAKE_SOURCE_DIR}/Samples/Media/packs/cubemapsJS.zip )
+		 ${OGRE_SOURCE_DIR}/Samples/Media/packs/cubemapsJS.zip )
 endif()
 
 ogre_add_executable(Sample_Postprocessing WIN32 MACOSX_BUNDLE ${SOURCE_FILES} ${POSTPROCESSING_RESOURCES})

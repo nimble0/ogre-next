@@ -1,7 +1,7 @@
 # Configure Samples build
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Common/include)
-include_directories(${CMAKE_SOURCE_DIR}/Components/Overlay/include)
+include_directories(${OGRE_SOURCE_DIR}/Components/Overlay/include)
 
 set( SAMPLE_COMMON_BASIC_RESOURCES "" )
 set( SAMPLE_COMMON_RESOURCES "" )
@@ -38,18 +38,18 @@ if( APPLE )
                  ${SAMPLE_COMMON_STORYBOARD_RESOURCE}
 		 ${CMAKE_BINARY_DIR}/bin/resources2.cfg
 		 ${CMAKE_BINARY_DIR}/bin/plugins.cfg
-		 ${CMAKE_SOURCE_DIR}/Samples/Media/2.0
-		 ${CMAKE_SOURCE_DIR}/Samples/Media/Hlms
-		 ${CMAKE_SOURCE_DIR}/Samples/Media/packs/DebugPack.zip
-		 ${CMAKE_SOURCE_DIR}/Samples/Media/packs/CornellBox.zip )
+		 ${OGRE_SOURCE_DIR}/Samples/Media/2.0
+		 ${OGRE_SOURCE_DIR}/Samples/Media/Hlms
+		 ${OGRE_SOURCE_DIR}/Samples/Media/packs/DebugPack.zip
+		 ${OGRE_SOURCE_DIR}/Samples/Media/packs/CornellBox.zip )
 
 	set( SAMPLE_COMMON_RESOURCES ${SAMPLE_COMMON_BASIC_RESOURCES}
-		 ${CMAKE_SOURCE_DIR}/Samples/Media/models
-		 ${CMAKE_SOURCE_DIR}/Samples/Media/materials/textures )
+		 ${OGRE_SOURCE_DIR}/Samples/Media/models
+		 ${OGRE_SOURCE_DIR}/Samples/Media/materials/textures )
 
 	 set( SAMPLE_COMMON_COMPUTE_RESOURCES
-		  ${CMAKE_SOURCE_DIR}/Samples/Media/Compute
-		  ${CMAKE_SOURCE_DIR}/Samples/Media/VCT )
+		  ${OGRE_SOURCE_DIR}/Samples/Media/Compute
+		  ${OGRE_SOURCE_DIR}/Samples/Media/VCT )
 
         if( OGRE_BUILD_PLATFORM_APPLE_IOS )
             set( SAMPLES_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/Common/src/System/iOS/Resources/Info.plist )
@@ -64,21 +64,21 @@ if( WINDOWS_STORE OR WINDOWS_PHONE )
 		 ${CMAKE_BINARY_DIR}/bin/release/resources2.cfg
 		 ${CMAKE_BINARY_DIR}/bin/release/plugins.cfg
 		 ${CMAKE_BINARY_DIR}/bin/debug/plugins_d.cfg
-		 ${CMAKE_SOURCE_DIR}/Samples/Media/2.0
-		 ${CMAKE_SOURCE_DIR}/Samples/Media/Hlms
-		 ${CMAKE_SOURCE_DIR}/Samples/Media/packs/DebugPack.zip
-		 ${CMAKE_SOURCE_DIR}/Samples/Media/packs/CornellBox.zip )
+		 ${OGRE_SOURCE_DIR}/Samples/Media/2.0
+		 ${OGRE_SOURCE_DIR}/Samples/Media/Hlms
+		 ${OGRE_SOURCE_DIR}/Samples/Media/packs/DebugPack.zip
+		 ${OGRE_SOURCE_DIR}/Samples/Media/packs/CornellBox.zip )
 
 	set( SAMPLE_COMMON_RESOURCES ${SAMPLE_COMMON_BASIC_RESOURCES}
-		 ${CMAKE_SOURCE_DIR}/Samples/Media/models
-		 ${CMAKE_SOURCE_DIR}/Samples/Media/materials/textures )
+		 ${OGRE_SOURCE_DIR}/Samples/Media/models
+		 ${OGRE_SOURCE_DIR}/Samples/Media/materials/textures )
 
 	set( SAMPLE_COMMON_COMPUTE_RESOURCES
-		  ${CMAKE_SOURCE_DIR}/Samples/Media/Compute
-		  ${CMAKE_SOURCE_DIR}/Samples/Media/VCT )
+		  ${OGRE_SOURCE_DIR}/Samples/Media/Compute
+		  ${OGRE_SOURCE_DIR}/Samples/Media/VCT )
 endif()
 if( WIN32 AND NOT WINDOWS_STORE AND NOT WINDOWS_PHONE )
-	set( SAMPLE_COMMON_RESOURCES ${CMAKE_SOURCE_DIR}/CMake/Templates/OSCompatibility.Win32.manifest )
+	set( SAMPLE_COMMON_RESOURCES ${OGRE_SOURCE_DIR}/CMake/Templates/OSCompatibility.Win32.manifest )
 endif()
 
 function(ogre_config_sample_pkg SAMPLENAME)

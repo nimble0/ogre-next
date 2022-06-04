@@ -107,7 +107,7 @@ include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}/include/EGL
   ${CMAKE_CURRENT_SOURCE_DIR}/include/EAGL
   ${CMAKE_CURRENT_SOURCE_DIR}/src/GLSLES/include
-  ${CMAKE_SOURCE_DIR}/Components/RTShaderSystem/include
+  ${OGRE_SOURCE_DIR}/Components/RTShaderSystem/include
   ${OPENGLES3_INCLUDE_DIR} ${OPENGLES2_INCLUDE_DIR} ${EGL_INCLUDE_DIR}
 )
 

@@ -55,7 +55,7 @@ find_library(OpenVR_LIBRARY_DBG NAMES ${OpenVR_LIBRARY_NAMES_DBG} HINTS ${OpenVR
 make_library_set(OpenVR_LIBRARY)
 
 if(WIN32)
-	set(OpenVR_BIN_SEARCH_PATH ${OGRE_DEPENDENCIES_DIR}/bin ${CMAKE_SOURCE_DIR}/Dependencies/bin ${OPENVR_HOME}/dll
+	set(OpenVR_BIN_SEARCH_PATH ${OGRE_DEPENDENCIES_DIR}/bin ${OGRE_SOURCE_DIR}/Dependencies/bin ${OPENVR_HOME}/dll
 		${ENV_OPENVR_HOME}/dll ${ENV_OGRE_DEPENDENCIES_DIR}/bin
 		${OGRE_SOURCE}/Dependencies/bin ${ENV_OGRE_SOURCE}/Dependencies/bin
 		${OGRE_SDK}/bin ${ENV_OGRE_SDK}/bin

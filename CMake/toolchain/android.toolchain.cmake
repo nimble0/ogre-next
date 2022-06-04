@@ -124,7 +124,7 @@
 #      libraries. Automatically turned for NDK r5x and r6x due to GLESv2
 #      problems.
 #
-#    LIBRARY_OUTPUT_PATH_ROOT=${CMAKE_SOURCE_DIR} - where to output binary
+#    LIBRARY_OUTPUT_PATH_ROOT=${OGRE_SOURCE_DIR} - where to output binary
 #      files. See additional details below.
 #
 #    ANDROID_SET_OBSOLETE_VARIABLES=ON - if set, then toolchain defines some
@@ -192,7 +192,7 @@
 #
 #    LIBRARY_OUTPUT_PATH_ROOT should be set in cache to determine where Android
 #    libraries will be installed.
-#    Default is ${CMAKE_SOURCE_DIR}, and the android libs will always be
+#    Default is ${OGRE_SOURCE_DIR}, and the android libs will always be
 #    under the ${LIBRARY_OUTPUT_PATH_ROOT}/libs/${ANDROID_NDK_OUTPUT_ABI_NAME}
 #    (depending on the target ABI). This is convenient for Android packaging.
 #
@@ -1616,11 +1616,11 @@ if( ANDROID_EXPLICIT_CRT_LINK )
 endif()
 
 # setup output directories
-set( LIBRARY_OUTPUT_PATH_ROOT ${CMAKE_SOURCE_DIR} CACHE PATH "root for library output, set this to change where android libs are installed to" )
+set( LIBRARY_OUTPUT_PATH_ROOT ${OGRE_SOURCE_DIR} CACHE PATH "root for library output, set this to change where android libs are installed to" )
 set( CMAKE_INSTALL_PREFIX "${ANDROID_TOOLCHAIN_ROOT}/user" CACHE STRING "path for installing" )
 
 if(NOT _CMAKE_IN_TRY_COMPILE)
- if( EXISTS "${CMAKE_SOURCE_DIR}/jni/CMakeLists.txt" )
+ if( EXISTS "${OGRE_SOURCE_DIR}/jni/CMakeLists.txt" )
    set( EXECUTABLE_OUTPUT_PATH "${LIBRARY_OUTPUT_PATH_ROOT}/bin/${ANDROID_NDK_OUTPUT_ABI_NAME}" CACHE PATH "Output directory for applications" )
  else()
   set( EXECUTABLE_OUTPUT_PATH "${LIBRARY_OUTPUT_PATH_ROOT}/bin" CACHE PATH "Output directory for applications" )
@@ -1645,7 +1645,7 @@ set( ANDROID True )
 set( BUILD_ANDROID True )
 
 # where is the target environment
-set( CMAKE_FIND_ROOT_PATH "${CMAKE_SOURCE_DIR}" "${OGRE_DEPENDENCIES_DIR}" "${ANDROID_TOOLCHAIN_ROOT}/bin" "${ANDROID_TOOLCHAIN_ROOT}/${ANDROID_TOOLCHAIN_MACHINE_NAME}" "${ANDROID_SYSROOT}" "${CMAKE_INSTALL_PREFIX}" "${CMAKE_INSTALL_PREFIX}/share" )
+set( CMAKE_FIND_ROOT_PATH "${OGRE_SOURCE_DIR}" "${OGRE_DEPENDENCIES_DIR}" "${ANDROID_TOOLCHAIN_ROOT}/bin" "${ANDROID_TOOLCHAIN_ROOT}/${ANDROID_TOOLCHAIN_MACHINE_NAME}" "${ANDROID_SYSROOT}" "${CMAKE_INSTALL_PREFIX}" "${CMAKE_INSTALL_PREFIX}/share" )
 
 # only search for libraries and includes in the ndk toolchain
 set( CMAKE_FIND_ROOT_PATH_MODE_PROGRAM ONLY )

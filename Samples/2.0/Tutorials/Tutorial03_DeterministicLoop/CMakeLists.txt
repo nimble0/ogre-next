@@ -21,7 +21,7 @@ if( OGRE_BUILD_PLATFORM_APPLE_IOS )
 		 ${CMAKE_CURRENT_SOURCE_DIR}/iOS/Tutorial.storyboard )
 	set( SOURCE_FILES ${SOURCE_FILES} ${CMAKE_CURRENT_SOURCE_DIR}/iOS/TutorialViewController.mm )
 
-	include_directories( ${CMAKE_SOURCE_DIR}/RenderSystems/Metal/include )
+	include_directories( ${OGRE_SOURCE_DIR}/RenderSystems/Metal/include )
 endif()
 
 if( OGRE_BUILD_SAMPLES_AS_BUNDLES )
