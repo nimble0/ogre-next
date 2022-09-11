@@ -3,8 +3,11 @@
 #include "CameraController.h"
 #include "GraphicsSystem.h"
 #include "MyCustomRenderable.h"
+#include "MyCompositorPassProvider.h"
 
 #include "OgreSceneManager.h"
+#include "OgreRoot.h"
+#include "Compositor/OgreCompositorManager2.h"
 
 #include "OgreCamera.h"
 
@@ -14,6 +17,17 @@ namespace Demo
         TutorialGameState( helpDescription ),
         mMyCustomRenderable( 0 )
     {
+    }
+    void CustomRenderableGameState::initialize0(void)
+    {
+        Ogre::Root::getSingleton()
+            .getCompositorManager2()
+            ->setCompositorPassProvider(OGRE_NEW Ogre::MyCompositorPassProvider());
+    }
+    void CustomRenderableGameState::initialize(void)
+    {
+        if(!Ogre::Root::getSingleton().hasMovableObjectFactory(Ogre::MyCustomRenderableFactory::FACTORY_TYPE_NAME))
+            Ogre::Root::getSingleton().addMovableObjectFactory(OGRE_NEW Ogre::MyCustomRenderableFactory);
     }
     //-----------------------------------------------------------------------------------
     void CustomRenderableGameState::createScene01(void)

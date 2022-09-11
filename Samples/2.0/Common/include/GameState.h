@@ -11,6 +11,7 @@ namespace Demo
     public:
         virtual ~GameState() {}
 
+        virtual void initialize0(void) {}
         virtual void initialize(void) {}
         virtual void deinitialize(void) {}
 

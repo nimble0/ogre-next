@@ -12,6 +12,8 @@
 
 namespace Ogre
 {
+    Ogre::String MyCustomRenderableFactory::FACTORY_TYPE_NAME = "MyCustomRenderable";
+
     struct CubeVertices
     {
         float px, py, pz;   //Position
@@ -185,7 +187,7 @@ namespace Ogre
     //-----------------------------------------------------------------------------------
     const String& MyCustomRenderable::getMovableType(void) const
     {
-        return BLANKSTRING;
+        return MyCustomRenderableFactory::FACTORY_TYPE_NAME;
     }
     //-----------------------------------------------------------------------------------
     const LightList& MyCustomRenderable::getLights(void) const

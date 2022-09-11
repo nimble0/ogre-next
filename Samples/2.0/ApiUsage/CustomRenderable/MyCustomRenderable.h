@@ -25,6 +25,29 @@ namespace Ogre
         virtual void getWorldTransforms( Matrix4* xform ) const;
         virtual bool getCastsShadows(void) const;
     };
+
+    class MyCustomRenderableFactory : public Ogre::MovableObjectFactory
+    {
+    public:
+        static Ogre::String FACTORY_TYPE_NAME;
+        const Ogre::String& getType() const override { return FACTORY_TYPE_NAME; }
+        static const Ogre::uint8 RENDER_QUEUE_ID = 3;
+
+        void destroyInstance(Ogre::MovableObject* obj) override
+        {
+            OGRE_DELETE obj;
+        }
+
+    protected:
+        virtual Ogre::MovableObject* createInstanceImpl(
+            Ogre::IdType id,
+            Ogre::ObjectMemoryManager* objectMemoryManager,
+            Ogre::SceneManager* manager,
+            const Ogre::NameValuePairList* params = 0) override
+        {
+            return OGRE_NEW MyCustomRenderable(id, objectMemoryManager, manager, RENDER_QUEUE_ID);
+        }
+    };
 }
 
 #endif

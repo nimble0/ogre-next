@@ -13,6 +13,11 @@ namespace Demo
     {
     }
     //-----------------------------------------------------------------------------------
+    void BaseSystem::initialize0(void)
+    {
+        mCurrentGameState->initialize0();
+    }
+    //-----------------------------------------------------------------------------------
     void BaseSystem::initialize(void)
     {
         mCurrentGameState->initialize();

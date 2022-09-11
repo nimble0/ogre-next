@@ -293,6 +293,8 @@ namespace Demo
 
         mOverlaySystem = OGRE_NEW Ogre::v1::OverlaySystem();
 
+        BaseSystem::initialize0();
+
         setupResources();
         loadResources();
         chooseSceneManager();
@@ -839,7 +841,7 @@ namespace Demo
     {
         Ogre::CompositorManager2 *compositorManager = mRoot->getCompositorManager2();
 
-        const Ogre::String workspaceName( "Demo Workspace" );
+        const Ogre::String workspaceName( "DemoWorkspace" );
         if( !compositorManager->hasWorkspaceDefinition( workspaceName ) )
         {
             compositorManager->createBasicWorkspaceDef( workspaceName, mBackgroundColour,

@@ -19,6 +19,8 @@ namespace Demo
     public:
         CustomRenderableGameState( const Ogre::String &helpDescription );
 
+        virtual void initialize0(void);
+        virtual void initialize(void);
         virtual void createScene01(void);
         virtual void destroyScene(void);
     };

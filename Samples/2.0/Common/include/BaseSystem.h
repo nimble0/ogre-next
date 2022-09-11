@@ -17,6 +17,7 @@ namespace Demo
         BaseSystem( GameState *gameState );
         virtual ~BaseSystem();
 
+        virtual void initialize0(void);
         virtual void initialize(void);
         virtual void deinitialize(void);
 
