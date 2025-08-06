@@ -472,45 +472,45 @@ namespace Ogre
                                                 params->getFloatPointer( def->physicalIndex ) ) );
                         break;
                     case GCT_INT1:
+                    case GCT_BOOL1:
                         OGRE_CHECK_GL_ERROR(
                             glUniform1iv( currentUniform->mLocation, glArraySize,
                                           (GLint *)params->getIntPointer( def->physicalIndex ) ) );
                         break;
                     case GCT_INT2:
+                    case GCT_BOOL2:
                         OGRE_CHECK_GL_ERROR(
                             glUniform2iv( currentUniform->mLocation, glArraySize,
                                           (GLint *)params->getIntPointer( def->physicalIndex ) ) );
                         break;
                     case GCT_INT3:
+                    case GCT_BOOL3:
                         OGRE_CHECK_GL_ERROR(
                             glUniform3iv( currentUniform->mLocation, glArraySize,
                                           (GLint *)params->getIntPointer( def->physicalIndex ) ) );
                         break;
                     case GCT_INT4:
+                    case GCT_BOOL4:
                         OGRE_CHECK_GL_ERROR(
                             glUniform4iv( currentUniform->mLocation, glArraySize,
                                           (GLint *)params->getIntPointer( def->physicalIndex ) ) );
                         break;
                     case GCT_UINT1:
-                    case GCT_BOOL1:
                         OGRE_CHECK_GL_ERROR( glUniform1uiv(
                             currentUniform->mLocation, glArraySize,
                             (GLuint *)params->getUnsignedIntPointer( def->physicalIndex ) ) );
                         break;
                     case GCT_UINT2:
-                    case GCT_BOOL2:
                         OGRE_CHECK_GL_ERROR( glUniform2uiv(
                             currentUniform->mLocation, glArraySize,
                             (GLuint *)params->getUnsignedIntPointer( def->physicalIndex ) ) );
                         break;
                     case GCT_UINT3:
-                    case GCT_BOOL3:
                         OGRE_CHECK_GL_ERROR( glUniform3uiv(
                             currentUniform->mLocation, glArraySize,
                             (GLuint *)params->getUnsignedIntPointer( def->physicalIndex ) ) );
                         break;
                     case GCT_UINT4:
-                    case GCT_BOOL4:
                         OGRE_CHECK_GL_ERROR( glUniform4uiv(
                             currentUniform->mLocation, glArraySize,
                             (GLuint *)params->getUnsignedIntPointer( def->physicalIndex ) ) );
